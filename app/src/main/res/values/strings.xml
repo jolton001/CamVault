@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CamVault</string>
+    <string name="nav_monitor">Monitor</string>
+    <string name="nav_recordings">Vault</string>
+    <string name="nav_cloud">Cloud</string>
+    <string name="action_add_camera">Add Camera</string>
+    <string name="action_scan_onvif">Scan ONVIF LAN</string>
+    <string name="action_record">Record</string>
+    <string name="action_stop_record">Stop</string>
+    <string name="action_upload_cloud">Upload</string>
+    <string name="action_test_connection">Test Connection</string>
+    <string name="empty_cameras_title">No ONVIF or RTSP cameras connected</string>
+    <string name="empty_cameras_subtitle">Scan your local network for ONVIF cameras or enter an RTSP stream with audio to monitor, record MP4 clips, and upload to cloud storage.</string>
+    <string name="empty_recordings_title">No recorded clips yet</string>
+    <string name="empty_recordings_subtitle">Open any camera stream and tap Record to capture H.264/AAC MP4 clips and sync them to your cloud bucket.</string>
+    <string name="upload_notification_channel_name">Cloud Uploads</string>
+    <string name="upload_notification_channel_desc">Shows progress when uploading recorded camera clips to cloud storage</string>
+</resources>

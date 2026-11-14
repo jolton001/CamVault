@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Default: DENY cleartext. Only hosts explicitly allow-listed below may use plain HTTP. -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Public cloud endpoints must always use HTTPS with system-trusted CAs.
+         (Also enforced at runtime by SecurityGuards.requireSafeCloudUrl.) -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">mega.co.nz</domain>
+        <domain includeSubdomains="true">mega.nz</domain>
+        <domain includeSubdomains="true">amazonaws.com</domain>
+        <domain includeSubdomains="true">r2.cloudflarestorage.com</domain>
+        <domain includeSubdomains="true">backblazeb2.com</domain>
+        <domain includeSubdomains="true">digitaloceanspaces.com</domain>
+        <domain includeSubdomains="true">googleapis.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+
+    <!-- Loopback only for local dev/test servers.
+         NOTE: LAN camera ONVIF/RTSP sessions use raw sockets and are not subject to this
+         HTTP policy. If a non-loopback LAN HTTP endpoint is required (e.g. an
+         S3-compatible MinIO / WebDAV NAS), either serve it over HTTPS or list its
+         exact host here. -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain>127.0.0.1</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CamVault — README Preview</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #171a23;
+    --surface-2: #1e2230;
+    --text: #e6e8ee;
+    --muted: #9aa1b5;
+    --accent: #6c8cff;
+    --accent-2: #4ec9b0;
+    --border: #2a2f3e;
+    --code-bg: #0b0d13;
+    --warn: #ffb454;
+    --ok: #4ec9b0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 28px 80px; }
+
+  /* Banner */
+  .banner {
+    width: 100%;
+    border-radius: 14px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.4);
+    border: 1px solid var(--border);
+  }
+
+  h1 {
+    font-size: 2.1rem;
+    margin: 0 0 6px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  .tagline {
+    color: var(--muted);
+    font-size: 1.02rem;
+    margin: 0 0 26px;
+  }
+  blockquote {
+    margin: 0 0 30px;
+    padding: 14px 18px;
+    background: var(--surface);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  blockquote a { color: var(--accent); }
+
+  h2 {
+    font-size: 1.35rem;
+    margin: 44px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.3px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin: 26px 0 10px;
+    color: var(--accent-2);
+  }
+  p { margin: 12px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+  }
+  th { background: var(--surface-2); font-weight: 600; }
+  td { background: var(--surface); }
+
+  /* Code blocks */
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    font-family: "SF Mono", "JetBrains Mono", Consolas, monospace;
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+  code {
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-family: "SF Mono", "JetBrains Mono", Consolas, monospace;
+    font-size: 0.88em;
+  }
+  pre code { background: none; padding: 0; }
+
+  /* Checklist */
+  ul.checklist { list-style: none; padding-left: 0; }
+  ul.checklist li { padding: 8px 0 8px 30px; position: relative; }
+  ul.checklist li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: var(--ok);
+    font-weight: 700;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--accent-2);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+
+  .footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <img class="banner" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+
+  <h1>CamVault</h1>
+  <p class="tagline">Monitor IP security cameras: discover, watch live, record, and sync to cloud.</p>
+
+  <blockquote>
+    Built with Kotlin + Jetpack Compose, Room, Media3, and MEGA SDK protocols.<br>
+    View the source project in AI Studio: <a href="https://ai.studio/apps/75c6e7f8-17aa-41c7-ac94-de5171fb2872">ai.studio/apps/75c6e7f8-17aa-41c7-ac94-de5171fb2872</a>
+  </blockquote>
+
+  <h2>What the project does</h2>
+  <table>
+    <thead><tr><th>Area</th><th>What it provides</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Live monitoring</strong></td><td>Browse discovered cameras and watch live RTSP streams (native player with MP4 fallback).</td></tr>
+      <tr><td><strong>Recording</strong></td><td>Record RTSP streams to MP4 (real RTP/H.264/HEVC/AAC depacketization).</td></tr>
+      <tr><td><strong>ONVIF discovery</strong></td><td>Broadcast discovery + SOAP camera management on your LAN.</td></tr>
+      <tr><td><strong>Cloud sync</strong></td><td>Upload recordings to your own MEGA account; schedule background sync.</td></tr>
+      <tr><td><strong>Security</strong></td><td>Credentials encrypted with AES-256-GCM backed by <code>AndroidKeyStore</code>; backups and device transfer disabled so camera passwords never leave the device.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>How the project is organized</h2>
+  <pre><code>app/src/main/java/com/example/
+├── MainActivity.kt              # Entry point, host Compose UI
+├── CamVaultApplication.kt       # Application class (DB + repository wiring)
+├── data/                        # Room database (entities, DAOs, repository)
+├── media/                       # RTSP live player, MP4 fallback, stream recorder, probe
+├── network/
+│   ├── onvif/                  # ONVIF discovery + SOAP client
+│   └── cloud/                  # MEGA cloud upload, scheduled sync, background worker
+├── security/                    # CredentialCipher (encryption) + SecurityGuards
+└── ui/
+    ├── navigation/              # Routes (Monitor, Recordings, CloudStorage, CameraPlayer, AddEditCamera)
+    ├── screens/                 # Compose screens
+    └── theme/                   # Material 3 theme</code></pre>
+
+  <p><strong>Screens</strong> (bottom navigation):</p>
+  <ul>
+    <li><strong>Monitor</strong> — your cameras; tap to view live, record, or edit.</li>
+    <li><strong>Add / Edit Camera</strong> — add a camera manually (name, RTSP URL, credentials) or pick a discovered one.</li>
+    <li><strong>Camera Player</strong> — live view with record controls.</li>
+    <li><strong>Recordings</strong> — list of saved clips; play or mark for cloud upload.</li>
+    <li><strong>Cloud Storage</strong> — connect a MEGA account, manage sync / uploads.</li>
+  </ul>
+
+  <h3>How data flows</h3>
+  <pre><code>IP camera ──RTSP/ONVIF──► media/ (player/recorder) ──► Room database (data/)
+                                                          │
+                                  security/ (CredentialCipher)
+                                                          │
+                                     network/cloud/ ──► MEGA upload &amp; sync</code></pre>
+
+  <h2>Getting started (for developers)</h2>
+  <p><strong>Prerequisites:</strong> <a href="https://developer.android.com/studio">Android Studio</a> (targets Android, Kotlin 2.x + Compose).</p>
+  <ol>
+    <li>Open Android Studio.</li>
+    <li>Select <strong>Open</strong> and choose this directory. Allow Android Studio to fix any import incompatibilities.</li>
+    <li>Create a file named <code>.env</code> in the project root and set <code>GEMINI_API_KEY</code> to your Gemini API key (see <code>.env.example</code> for the shape). This enables the AI Studio–generated features.</li>
+    <li><strong>Signing (IMPORTANT):</strong> the app's <code>app/build.gradle.kts</code> references a <code>debugConfig</code> signing config. On your <strong>first</strong> local debug run you may need to either create a <code>debug.keystore</code> or temporarily adjust the signing block — see the comments inside <code>app/build.gradle.kts</code>.</li>
+    <li>Run the app on an emulator or physical device.</li>
+  </ol>
+  <blockquote>If you published the app through AI Studio and use the same key in Google Play, <a href="https://support.google.com/googleplay/android-developer/answer/9842756#zippy=%2Crequest-an-upload-key-reset">request an upload key reset</a> before releasing.</blockquote>
+
+  <h2>Using the app (end user)</h2>
+
+  <h3>1. Add your cameras</h3>
+  <ul>
+    <li>Open <strong>Monitor</strong> → <strong>Add camera</strong>.</li>
+    <li>Either let the app <strong>discover</strong> ONVIF cameras on your network, or enter details manually:
+      <ul>
+        <li><strong>Name</strong> — a friendly label.</li>
+        <li><strong>RTSP URL</strong> — e.g. <code>rtsp://192.168.1.20:554/stream1</code>.</li>
+        <li><strong>Username / Password</strong> — camera credentials (stored encrypted).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>2. Watch and record live</h3>
+  <ul>
+    <li>Tap a camera on <strong>Monitor</strong> to open the <strong>Camera Player</strong> — live video starts automatically.</li>
+    <li>Use <strong>Record</strong> to capture a clip. Recordings are stored on-device as MP4 files.</li>
+  </ul>
+
+  <h3>3. Manage recordings</h3>
+  <ul>
+    <li>Open <strong>Recordings</strong> to play, delete, or flag recordings for cloud upload.</li>
+  </ul>
+
+  <h3>4. Connect MEGA and sync</h3>
+  <ul>
+    <li>Open <strong>Cloud Storage</strong> and sign in to your MEGA account.</li>
+    <li>Choose what to sync; the background worker uploads recordings and can run on a schedule.</li>
+  </ul>
+
+  <h3>5. Security notes</h3>
+  <ul>
+    <li>Camera credentials are encrypted with AES-256-GCM stored in <code>AndroidKeyStore</code>.</li>
+    <li><code>allowBackup</code> is disabled, so credentials are <strong>not</strong> copied to cloud backups or transferred to new devices.</li>
+    <li><strong>Cleartext/HTTP is denied by default</strong> (see <code>network_security_config.xml</code>). Only loopback and explicitly allow-listed hosts may use plain HTTP; use <code>rtsp://</code>/HTTPS on your LAN where your cameras support it.</li>
+  </ul>
+
+  <h2>Building &amp; testing</h2>
+  <ul>
+    <li>The project uses the Gradle version catalog (<code>gradle/libs.versions.toml</code>).</li>
+    <li>Unit + instrumentation tests live in <code>app/src/test/</code> and <code>app/src/androidTest/</code>.</li>
+    <li>Generate a debug build in Android Studio (<strong>Build ▸ Make Project</strong>) or via Gradle.</li>
+  </ul>
+
+  <h2>Security before pushing to GitHub</h2>
+  <p>This repo is intended to be <strong>public-safe</strong>. Before you push, confirm:</p>
+  <ul class="checklist">
+    <li>No real keys in <code>.env</code>, <code>.env.example</code>, or code — <code>GEMINI_API_KEY</code> is a placeholder.</li>
+    <li><code>local.properties</code>, <code>debug.keystore</code>, and build folders are gitignored (they are).</li>
+    <li><code>google-services.json</code> is not committed (currently absent — if Firebase is used, keep it out or treat as a secret).</li>
+    <li>You've reviewed <code>network_security_config.xml</code> and the signing config for your use case.</li>
+  </ul>
+
+  <div class="footer">CamVault · README preview · generated for pre-push review</div>
+
+</div>
+</body>
+</html>

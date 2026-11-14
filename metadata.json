@@ -1,0 +1,6 @@
+{
+  "name": "CamVault",
+  "description": "ONVIF and RTSP camera monitor with live audio streaming, MP4 video recording, and cloud storage upload.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

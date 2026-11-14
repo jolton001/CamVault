@@ -7,7 +7,6 @@
 **CamVault** is an Android app for **monitoring IP security cameras**. It discovers cameras on your network (ONVIF), plays live RTSP streams, records clips, stores them on-device, and syncs published to a MEGA cloud account — all with credentials encrypted at rest.
 
 > Built with Kotlin + Jetpack Compose, Room, Media3, and MEGA SDK protocols.
-> View the source project in AI Studio: https://ai.studio/apps/75c6e7f8-17aa-41c7-ac94-de5171fb2872
 
 ---
 

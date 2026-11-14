@@ -57,7 +57,7 @@ class OnvifSoapClient {
                     getStreamUriInternal(mediaUrl, profile.token, username, password)
                 }.getOrDefault("")
                 val normalizedUri = rewriteInvalidRtspHost(rawUri, serviceHost)
-                val authUri = injectRtspCredentials(normalizedUri, username, password)
+                val authUri = injectRtspCredentials(normalizedUri, username, password, serviceHost)
                 profile.copy(rtspUri = authUri)
             }
 
@@ -507,28 +507,40 @@ class OnvifSoapClient {
             return rtspUrl
         }
 
-        fun injectRtspCredentials(rtspUrl: String, username: String, password: String): String {
-            if (rtspUrl.isBlank() || username.isBlank()) return rtspUrl
+        fun injectRtspCredentials(
+            rtspUrl: String,
+            username: String,
+            password: String,
+            expectedHost: String
+        ): String {
+            if (rtspUrl.isBlank() || username.isBlank() || expectedHost.isBlank()) return rtspUrl
+            val uri = runCatching { URI(rtspUrl) }.getOrNull() ?: return rtspUrl
+            val scheme = uri.scheme?.lowercase(Locale.ROOT)
+            if (scheme != "rtsp" && scheme != "rtsps") return rtspUrl
+            val host = uri.host ?: return rtspUrl
+            if (!hostsMatch(host, expectedHost)) return rtspUrl
+            if (uri.rawUserInfo != null) return rtspUrl
             if (rtspUrl.contains("user=", ignoreCase = true) && rtspUrl.contains("password=", ignoreCase = true)) {
                 return rtspUrl
             }
-            val uri = runCatching { URI(rtspUrl) }.getOrNull()
-            if (uri != null) {
-                if (!uri.userInfo.isNullOrBlank()) return rtspUrl
-                val encUser = Uri.encode(username)
-                val encPass = Uri.encode(password)
-                val scheme = uri.scheme ?: "rtsp"
-                val host = uri.host ?: return rtspUrl
-                val portPart = if (uri.port > 0) ":${uri.port}" else ""
-                val pathPart = uri.rawPath.orEmpty()
-                val queryPart = uri.rawQuery?.let { "?$it" }.orEmpty()
-                return "$scheme://$encUser:$encPass@$host$portPart$pathPart$queryPart"
-            }
-            // Fallback for non-standard RTSP URLs with unescaped characters
-            if (rtspUrl.contains("@")) return rtspUrl
+            if (uri.port !in -1..65535) return rtspUrl
+
+            val authority = uri.rawAuthority ?: return rtspUrl
             val encUser = Uri.encode(username)
             val encPass = Uri.encode(password)
-            return rtspUrl.replaceFirst("rtsp://", "rtsp://$encUser:$encPass@", ignoreCase = true)
+            val pathPart = uri.rawPath.orEmpty()
+            val queryPart = uri.rawQuery?.let { "?$it" }.orEmpty()
+            val fragmentPart = uri.rawFragment?.let { "#$it" }.orEmpty()
+            return "${uri.scheme}://$encUser:$encPass@$authority$pathPart$queryPart$fragmentPart"
+        }
+
+        private fun hostsMatch(uriHost: String, expectedHost: String): Boolean {
+            fun normalize(host: String) = host.trim()
+                .removeSurrounding("[", "]")
+                .trimEnd('.')
+                .lowercase(Locale.ROOT)
+            val expected = normalize(expectedHost)
+            return expected.isNotEmpty() && normalize(uriHost) == expected
         }
 
         private fun escapeXml(input: String): String =

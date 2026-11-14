@@ -282,11 +282,15 @@ class AddCameraViewModel(
 
     fun testAndCapturePreview() {
         val current = _uiState.value
+        val expectedHost = current.host.trim().ifBlank {
+            runCatching { URI(current.rtspUrl.trim()).host }.getOrNull().orEmpty()
+        }
         val finalRtsp = if (current.rtspUrl.isNotBlank()) {
             OnvifSoapClient.injectRtspCredentials(
                 current.rtspUrl.trim(),
                 current.username.trim(),
-                current.password
+                current.password,
+                expectedHost
             )
         } else {
             ""
@@ -327,11 +331,15 @@ class AddCameraViewModel(
 
     fun saveCamera(onSaved: (Long) -> Unit) {
         val current = _uiState.value
+        val expectedHost = current.host.trim().ifBlank {
+            runCatching { URI(current.rtspUrl.trim()).host }.getOrNull().orEmpty()
+        }
         val finalRtsp = if (current.rtspUrl.isNotBlank()) {
             OnvifSoapClient.injectRtspCredentials(
                 current.rtspUrl.trim(),
                 current.username.trim(),
-                current.password
+                current.password,
+                expectedHost
             )
         } else {
             ""

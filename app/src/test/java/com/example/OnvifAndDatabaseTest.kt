@@ -104,9 +104,45 @@ class OnvifAndDatabaseTest {
         val result = OnvifSoapClient.injectRtspCredentials(
             rtspUrl = "rtsp://192.168.1.50:554/h264Preview_01_main",
             username = "admin",
-            password = "secret"
+            password = "secret",
+            expectedHost = "192.168.1.50"
         )
         assertEquals("rtsp://admin:secret@192.168.1.50:554/h264Preview_01_main", result)
+    }
+
+    @Test
+    fun `injectRtspCredentials accepts matching host case-insensitively`() {
+        val result = OnvifSoapClient.injectRtspCredentials(
+            rtspUrl = "rtsps://CAMERA.EXAMPLE:322/stream",
+            username = "admin",
+            password = "secret",
+            expectedHost = "camera.example"
+        )
+        assertEquals("rtsps://admin:secret@CAMERA.EXAMPLE:322/stream", result)
+    }
+
+    @Test
+    fun `injectRtspCredentials leaves credentials off untrusted or malformed URLs`() {
+        val attackerUrl = "rtsp://attacker.example/stream"
+        val malformedUrl = "rtsp://attacker.example:invalid/stream"
+
+        assertEquals(
+            attackerUrl,
+            OnvifSoapClient.injectRtspCredentials(attackerUrl, "admin", "secret", "camera.example")
+        )
+        assertEquals(
+            malformedUrl,
+            OnvifSoapClient.injectRtspCredentials(malformedUrl, "admin", "secret", "camera.example")
+        )
+        assertEquals(
+            "http://camera.example/stream",
+            OnvifSoapClient.injectRtspCredentials(
+                "http://camera.example/stream",
+                "admin",
+                "secret",
+                "camera.example"
+            )
+        )
     }
 
     @Test

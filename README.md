@@ -1,7 +1,3 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
-
 # CamVault
 
 **CamVault** is an Android app for **monitoring IP security cameras**. It discovers cameras on your network (ONVIF), plays live RTSP streams, records clips, stores them on-device, and syncs published to a MEGA cloud account — all with credentials encrypted at rest.
